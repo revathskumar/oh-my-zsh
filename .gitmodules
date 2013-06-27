@@ -1,0 +1,3 @@
+[submodule "plugins/yeoman"]
+	path = plugins/yeoman
+	url = git@github.com:edouard-lopez/yeoman-zsh-plugin.git
