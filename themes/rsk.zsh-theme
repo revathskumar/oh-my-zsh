@@ -43,7 +43,7 @@ need_push () {
 rb_prompt(){
   if $(rvm current &> /dev/null)
   then
-    echo "%{$fg_bold[yellow]%}$(rvm current)%{$reset_color%}"
+    echo "%{$fg_bold[yellow]%}${$(rvm current):5}%{$reset_color%}"
   else
     echo ""
   fi
@@ -69,7 +69,7 @@ todo(){
 }
 
 directory_name(){
-  echo "%{$fg_bold[cyan]%}%5~%\/%{$reset_color%}"
+  echo "%{$fg_bold[cyan]%}%2~%\/%{$reset_color%}"
 }
 
 export PROMPT=$'\n$(rb_prompt) %{$fg_bold[white]%}λ%{$reset_color%} $(directory_name) $(git_dirty)$(need_push) $(parse_git_stash)\n› '
@@ -86,7 +86,7 @@ precmd() {
 # Checks if working tree contains stash(es)
 parse_git_stash() {
   if [[ -n $(git stash list 2> /dev/null) ]]; then
-    echo " with %{$fg_bold[blue]%}stash%{$reset_color%}"
+    echo "%{$fg_bold[blue]%}stash%{$reset_color%}"
   else
     echo ""
   fi
