@@ -49,6 +49,15 @@ rb_prompt(){
   fi
 }
 
+node_prompt(){
+  if $(nvm current &> /dev/null)
+  then
+    echo "%{$fg_bold[green]%}${$(nvm current)}%{$reset_color%}"
+  else
+    echo ""
+  fi
+}
+
 # This keeps the number of todos always available the right hand side of my
 # command line. I filter it to only count those tagged as "+next", so it's more
 # of a motivation to clear out the list.
@@ -72,7 +81,7 @@ directory_name(){
   echo "%{$fg_bold[cyan]%}%2~%\/%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt) %{$fg_bold[white]%}λ%{$reset_color%} $(directory_name) $(git_dirty)$(need_push) $(parse_git_stash)\n› '
+export PROMPT=$'\n$(rb_prompt)/$(node_prompt) %{$fg_bold[white]%}λ%{$reset_color%} $(directory_name) $(git_dirty)$(need_push) $(parse_git_stash)\n› '
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}$(todo)%{$reset_color%}"
 }
