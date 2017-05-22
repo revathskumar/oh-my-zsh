@@ -2,6 +2,10 @@ autoload colors && colors
 # cheers, @ehrenmurdick
 # http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
+git_ignored() {
+  echo $(/usr/bin/git ignored  2>/dev/null | wc -l)
+}
+
 git_branch() {
   echo $(/usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
 }
@@ -81,7 +85,7 @@ directory_name(){
   echo "%{$fg_bold[cyan]%}%2/%\/%{$reset_color%}"
 }
 
-export PROMPT=$'\n$(rb_prompt)/$(node_prompt) %{$fg_bold[white]%}λ%{$reset_color%} $(directory_name) $(git_dirty)$(need_push) $(parse_git_stash)\n› '
+export PROMPT=$'\n$(rb_prompt)/$(node_prompt) %{$fg_bold[white]%}λ%{$reset_color%} $(directory_name) $(git_dirty)$(need_push) $(parse_git_stash) $(git_ignored)\n› '
 set_prompt () {
   export RPROMPT="%{$fg_bold[cyan]%}$(todo)%{$reset_color%}"
 }
